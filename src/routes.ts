@@ -12,14 +12,14 @@ router.get("/api", (req: Request, res: Response) => {
 });
 
 // CLIENTES  <= ADICIONE
-router.get("/clientes", ClienteController.todos);
-router.post("/clientes", ClienteController.novo);
+router.get("/api/cliente", ClienteController.todos);
+router.post("/api/cliente", ClienteController.novo);
 
 //PRODUTOS
-router.get("/produtos", ProdutoController.todos);
-router.get("/produtos/alerta", ProdutoController.alerta);
-router.post("/produtos", ProdutoController.novo);
-router.put("/produtos/:idProduto", ProdutoController.atualizar);
+router.get("/api/produto", ProdutoController.todos);
+router.get("/api/produto/alerta", ProdutoController.alerta);
+router.post("/api/produto", ProdutoController.novo);
+router.put("/api/produto/:idProduto", ProdutoController.atualizar);
 
 // ========================================================================
 // ROTAS DE PEDIDOS E ITENS DE PEDIDO
@@ -32,29 +32,29 @@ router.put("/produtos/:idProduto", ProdutoController.atualizar);
 // Retorna todos os pedidos cadastrados no sistema.
 // Exemplo: GET /pedidos
 // Uso comum: listar pedidos na tela inicial.
-router.get("/pedidos", PedidoController.todos);
+router.get("/api/pedido", PedidoController.todos);
 
 // Retorna todos os itens de um pedido específico.
 // Exemplo: GET /pedidos/5/itens
 // Busca na tabela itens_pedido todos os produtos associados ao pedido com id = 5.
-router.get("/pedidos/:id/itens", PedidoController.itens);
+router.get("/api/pedido/:id/itens", PedidoController.itens);
 
 // Adiciona um novo item a um pedido existente.
 // Exemplo: POST /pedidos/5/itens
 // Corpo (Body JSON): { "idProduto": 3, "qtdProduto": 2, "precoUnit": 9.90 }
 // Insere um registro na tabela itens_pedido vinculado ao pedido com id = 5.
-router.post("/pedidos/:id/itens", PedidoController.novoItem);
+router.post("/api/pedido/:id/itens", PedidoController.novoItem);
 
 // Retorna os detalhes de um pedido específico.
 // Exemplo: GET /pedidos/5
 // Busca as informações principais do pedido (cliente, data, total, status, etc.).
-router.get("/pedidos/:id", PedidoController.obter);
+router.get("/api/pedido/:id", PedidoController.obter);
 
 // Cria um novo pedido.
 // Exemplo: POST /pedidos
 // Corpo (Body JSON): { "idCliente": 2, "dataVenda": "2025-11-03" }
 // Cria um registro na tabela pedidos.
-router.post("/pedidos", PedidoController.novo);
+router.post("/api/pedido", PedidoController.novo);
 
 // ========================================================================
 // ROTAS DE ITENS DO PEDIDO
@@ -68,7 +68,7 @@ router.post("/pedidos", PedidoController.novo);
 // Exemplo: GET /itens/12
 // Retorna todos os produtos que compõem a venda de ID 12,
 // com suas quantidades, valores unitários e totais.
-router.get("/itens/:idVenda", ItemPedidoController.todos);
+router.get("/api/iten", ItemPedidoController.todos);
 
 // Cadastra um novo item em uma venda.
 // Exemplo: POST /itens
@@ -80,7 +80,7 @@ router.get("/itens/:idVenda", ItemPedidoController.todos);
 //   "precoUnit": 9.90
 // }
 // Cria um novo registro na tabela itens_pedido vinculando o produto à venda.
-router.post("/itens", ItemPedidoController.novo);
+router.post("/api/iten", ItemPedidoController.novo);
 
 // Atualiza um item específico dentro de uma venda.
 // Exemplo: PUT /itens/12/5
@@ -91,12 +91,12 @@ router.post("/itens", ItemPedidoController.novo);
 //   "precoUnit": 10.00
 // }
 // Atualiza o item do produto 5 dentro da venda 12 na tabela itens_pedido.
-router.put("/itens/:idVenda/:idProduto", ItemPedidoController.atualizar);
+router.put("/api/iten/:idVenda/:idProduto", ItemPedidoController.atualizar);
 
 // Remove um item específico de uma venda.
 // Exemplo: DELETE /itens/12/5
 // Exclui da tabela itens_pedido o produto 5 pertencente à venda 12.
 // Essa ação normalmente atualiza o total do pedido posteriormente.
-router.delete("/itens/:idVenda/:idProduto", ItemPedidoController.remover);
+router.delete("/api/iten/:idVenda/:idProduto", ItemPedidoController.remover);
 
 export { router }; // Exporta o roteador
